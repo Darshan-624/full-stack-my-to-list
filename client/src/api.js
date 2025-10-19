@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 // The base URL for your backend API
-// This is the CORRRECT URL
 const API_URL = 'https://full-stack-my-to-list.onrender.com/api/tasks';
 
 // Create an 'api' instance

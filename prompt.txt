@@ -1,0 +1,16 @@
+Your frontend (on Netlify) is not getting permission to talk to your backend (on Render).
+
+The specific problem is a CORS (Cross-Origin Resource Sharing) error. Even though you have installed and used the cors package in your backend server code, your Render server is still not sending the necessary "permission slip" (the Access-Control-Allow-Origin header) back to your Netlify site. This is causing the browser to block the request for security.
+
+Prompt to Copy for Claude Sonnet 4
+Here is a clear prompt you can copy and paste to get help.
+
+"I have a MERN stack application deployed. My frontend is on Netlify at https://full-stack-my-todo-list.netlify.app and my backend is on Render at https://full-stack-my-to-list.onrender.com.
+
+My backend server on Render is live, running, and the logs show it is successfully connected to my MongoDB Atlas database.
+
+When my Netlify app tries to make any API request (like a GET or POST), the browser console shows this CORS error:
+
+Access to XMLHttpRequest at 'https://full-stack-my-to-list.onrender.com/api/tasks/' from origin 'https://full-stack-my-todo-list.netlify.app' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+
+I have already installed the cors package in my backend. My server/server.js file has been updated and re-deployed multiple times with different cors configurations, including a simple app.use(cors()), but I am still getting this exact same error. What else could be causing this?"

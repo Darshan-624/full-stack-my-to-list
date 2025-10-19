@@ -7,26 +7,19 @@ const app = express();
 
 // --- Middleware ---
 
-// == START NEW CORS CONFIG ==
-const allowedOrigins = ['https://full-stack-my-todo-list.netlify.app'];
-
+// CORS Configuration for production deployment
 const corsOptions = {
-  origin: function (origin, callback) {
-    // Check if the request's origin is in our allowed list OR if it's not a browser (e.g., Postman)
-    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  methods: 'GET, POST, PATCH, DELETE', // Specify allowed methods
-  optionsSuccessStatus: 204 // Use 204 "No Content" for preflight
+  origin: [
+    'https://full-stack-my-todo-list.netlify.app',
+    'http://localhost:3000', // for local development
+  ],
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'x-requested-with'],
+  credentials: true,
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
-// Use the CORS settings for all requests. This will handle preflight requests.
 app.use(cors(corsOptions));
-// == END NEW CORS CONFIG ==
-
 
 app.use(express.json()); // Allows Express to parse JSON
 
@@ -36,6 +29,26 @@ mongoose.connect(process.env.MONGODB_URI)
   .catch(err => console.error("MongoDB connection error:", err));
 
 // --- API Routes ---
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.status(200).json({ 
+    message: 'Server is running!', 
+    timestamp: new Date().toISOString(),
+    cors: 'enabled'
+  });
+});
+
+// Root endpoint
+app.get('/', (req, res) => {
+  res.status(200).json({ 
+    message: 'Todo API Server', 
+    endpoints: {
+      health: '/health',
+      tasks: '/api/tasks'
+    }
+  });
+});
+
 const taskRoutes = require('./routes/task.routes');
 app.use('/api/tasks', taskRoutes);
 
