@@ -8,13 +8,28 @@ const app = express();
 // --- Middleware ---
 
 // == START NEW CORS CONFIG ==
-// This explicitly allows your Netlify site to make requests
+// This is a more detailed configuration
+const allowedOrigins = ['https://full-stack-my-todo-list.netlify.app'];
+
 const corsOptions = {
-  origin: 'https://full-stack-my-todo-list.netlify.app',
-  optionsSuccessStatus: 200
+  origin: function (origin, callback) {
+    // Check if the request's origin is in our allowed list
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: 'GET, POST, PATCH, DELETE, OPTIONS', // Explicitly allow all methods
+  allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
 };
+
+// Handle all preflight requests
+app.options('*', cors(corsOptions)); 
+// Use the CORS settings for all other requests
 app.use(cors(corsOptions));
 // == END NEW CORS CONFIG ==
+
 
 app.use(express.json()); // Allows Express to parse JSON
 
