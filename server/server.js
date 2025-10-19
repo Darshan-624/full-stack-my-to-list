@@ -6,7 +6,16 @@ require('dotenv').config();
 const app = express();
 
 // --- Middleware ---
-app.use(cors()); 
+
+// == START NEW CORS CONFIG ==
+// This explicitly allows your Netlify site to make requests
+const corsOptions = {
+  origin: 'https://full-stack-my-todo-list.netlify.app',
+  optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
+// == END NEW CORS CONFIG ==
+
 app.use(express.json()); // Allows Express to parse JSON
 
 // --- Database Connection ---
