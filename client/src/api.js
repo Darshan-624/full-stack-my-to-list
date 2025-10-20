@@ -1,7 +1,11 @@
 import axios from 'axios';
 
-// The base URL for your backend API - using local server
-const API_BASE_URL = 'http://localhost:5000/api';
+// The base URL for your backend API - automatically detects environment
+const API_BASE_URL = process.env.REACT_APP_API_URL || 
+  (process.env.NODE_ENV === 'production' 
+    ? 'https://full-stack-my-todo-list.onrender.com/api' 
+    : 'http://localhost:5000/api');
+
 const TASKS_API_URL = `${API_BASE_URL}/tasks`;
 
 // Get the "ID card" (token) from local storage

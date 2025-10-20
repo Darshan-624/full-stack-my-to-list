@@ -1,0 +1,13 @@
+[build]
+  publish = "client/build"
+  command = "cd client && npm ci && npm run build"
+
+[build.environment]
+  CI = "false"
+  ESLINT_NO_DEV_ERRORS = "true"
+  NODE_ENV = "production"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

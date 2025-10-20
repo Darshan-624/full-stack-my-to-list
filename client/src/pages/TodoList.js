@@ -7,8 +7,6 @@ import TaskCard from '../components/TaskCard';
 
 function TodoList() {
   const [tasks, setTasks] = useState([]);
-  const [editingId, setEditingId] = useState(null);
-  const [editingText, setEditingText] = useState('');
   
   // Filter states
   const [searchTerm, setSearchTerm] = useState('');
@@ -106,12 +104,6 @@ function TodoList() {
     
     return matchesSearch && matchesStatus && matchesPriority && matchesCategory;
   });
-
-  // Calculate statistics
-  const totalTasks = tasks.length;
-  const completedTasks = tasks.filter(task => task.isCompleted).length;
-  const completionPercentage = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
-  const overdueTasks = tasks.filter(task => !task.isCompleted && isOverdue(task.dueDate)).length;
 
   return (
     <div className="bg-gray-900 min-h-screen text-white p-4 sm:p-8">
