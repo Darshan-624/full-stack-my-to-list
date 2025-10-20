@@ -1,16 +1,58 @@
-Your frontend (on Netlify) is not getting permission to talk to your backend (on Render).
-
-The specific problem is a CORS (Cross-Origin Resource Sharing) error. Even though you have installed and used the cors package in your backend server code, your Render server is still not sending the necessary "permission slip" (the Access-Control-Allow-Origin header) back to your Netlify site. This is causing the browser to block the request for security.
-
-Prompt to Copy for Claude Sonnet 4
-Here is a clear prompt you can copy and paste to get help.
-
-"I have a MERN stack application deployed. My frontend is on Netlify at https://full-stack-my-todo-list.netlify.app and my backend is on Render at https://full-stack-my-to-list.onrender.com.
-
-My backend server on Render is live, running, and the logs show it is successfully connected to my MongoDB Atlas database.
-
-When my Netlify app tries to make any API request (like a GET or POST), the browser console shows this CORS error:
-
-Access to XMLHttpRequest at 'https://full-stack-my-to-list.onrender.com/api/tasks/' from origin 'https://full-stack-my-todo-list.netlify.app' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.
-
-I have already installed the cors package in my backend. My server/server.js file has been updated and re-deployed multiple times with different cors configurations, including a simple app.use(cors()), but I am still getting this exact same error. What else could be causing this?"
+Access to XMLHttpRequest at 'https://full-stack-my-todo-list.onrender.com/api/auth/register' from origin 'http://localhost:3001' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+Register.js:15  POST https://full-stack-my-todo-list.onrender.com/api/auth/register net::ERR_FAILED
+dispatchXhrRequest @ xhr.js:198
+xhr @ xhr.js:15
+dispatchRequest @ dispatchRequest.js:51
+_request @ Axios.js:185
+request @ Axios.js:40
+httpMethod @ Axios.js:224
+wrap @ bind.js:5
+handleSubmit @ Register.js:15
+executeDispatch @ react-dom-client.development.js:19116
+runWithFiberInDEV @ react-dom-client.development.js:870
+processDispatchQueue @ react-dom-client.development.js:19165
+(anonymous) @ react-dom-client.development.js:19767
+batchedUpdates$1 @ react-dom-client.development.js:3255
+dispatchEventForPluginEventSystem @ react-dom-client.development.js:19320
+dispatchEvent @ react-dom-client.development.js:23584
+dispatchDiscreteEvent @ react-dom-client.development.js:23552
+<form>
+exports.jsxDEV @ react-jsx-dev-runtime.development.js:327
+Register @ Register.js:26
+react_stack_bottom_frame @ react-dom-client.development.js:25904
+renderWithHooksAgain @ react-dom-client.development.js:7762
+renderWithHooks @ react-dom-client.development.js:7674
+updateFunctionComponent @ react-dom-client.development.js:10166
+beginWork @ react-dom-client.development.js:11778
+runWithFiberInDEV @ react-dom-client.development.js:870
+performUnitOfWork @ react-dom-client.development.js:17639
+workLoopSync @ react-dom-client.development.js:17469
+renderRootSync @ react-dom-client.development.js:17450
+performWorkOnRoot @ react-dom-client.development.js:16498
+performWorkOnRootViaSchedulerTask @ react-dom-client.development.js:18957
+performWorkUntilDeadline @ scheduler.development.js:45
+<Register>
+exports.jsxDEV @ react-jsx-dev-runtime.development.js:327
+App @ App.js:46
+react_stack_bottom_frame @ react-dom-client.development.js:25904
+renderWithHooksAgain @ react-dom-client.development.js:7762
+renderWithHooks @ react-dom-client.development.js:7674
+updateFunctionComponent @ react-dom-client.development.js:10166
+beginWork @ react-dom-client.development.js:11778
+runWithFiberInDEV @ react-dom-client.development.js:870
+performUnitOfWork @ react-dom-client.development.js:17639
+workLoopSync @ react-dom-client.development.js:17469
+renderRootSync @ react-dom-client.development.js:17450
+performWorkOnRoot @ react-dom-client.development.js:16498
+performWorkOnRootViaSchedulerTask @ react-dom-client.development.js:18957
+performWorkUntilDeadline @ scheduler.development.js:45
+<App>
+exports.jsxDEV @ react-jsx-dev-runtime.development.js:327
+./src/index.js @ index.js:12
+options.factory @ react refresh:37
+__webpack_require__ @ bootstrap:22
+(anonymous) @ startup:7
+(anonymous) @ startup:7
+Register.js:19 Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'data')
+    at handleSubmit (Register.js:19:1)
+    i am getting this whener i try to regiester ?and how can i regiester through my mail na so add like to enter the email of theres to regiester 

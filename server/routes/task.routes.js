@@ -1,20 +1,28 @@
 const router = require('express').Router();
 const Task = require('../models/Task.model');
+const authMiddleware = require('../middleware/auth.middleware'); // <-- 1. Import the middleware
 
-// GET ALL TASKS (Read)
-router.get('/', async (req, res) => {
+// --- Apply authMiddleware to ALL task routes ---
+
+// GET ALL TASKS (Now only gets tasks for the logged-in user)
+router.get('/', authMiddleware, async (req, res) => { // <-- 2. Middleware added
   try {
-    const tasks = await Task.find();
+    // 3. Find tasks belonging ONLY to the logged-in user (req.user.id comes from the middleware)
+    const tasks = await Task.find({ userId: req.user.id }); 
     res.json(tasks);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
 
-// CREATE A TASK (Create)
-router.post('/', async (req, res) => {
+// CREATE A TASK (Now links the task to the user)
+router.post('/', authMiddleware, async (req, res) => { // <-- 2. Middleware added
   const task = new Task({
-    title: req.body.title
+    title: req.body.title,
+    priority: req.body.priority || 'medium',
+    category: req.body.category || 'Other',
+    dueDate: req.body.dueDate || null,
+    userId: req.user.id // <-- 4. Automatically link the task to the logged-in user
   });
 
   try {
@@ -25,13 +33,36 @@ router.post('/', async (req, res) => {
   }
 });
 
-// UPDATE A TASK (Update) - Toggles completion
-router.patch('/:id', async (req, res) => {
+// UPDATE A TASK (Now only lets the user update their *own* tasks)
+router.patch('/:id', authMiddleware, async (req, res) => { // <-- 2. Middleware added
   try {
-    const task = await Task.findById(req.params.id);
-    if (!task) return res.status(404).json({ message: "Task not found" });
+    // 5. Find the task ONLY if it matches the ID AND belongs to the user
+    const task = await Task.findOne({ _id: req.params.id, userId: req.user.id });
+    if (!task) {
+      // Return 404 even if the task exists but belongs to someone else
+      return res.status(404).json({ message: "Task not found or you don't have permission" });
+    }
 
-    task.isCompleted = !task.isCompleted;
+    // Update fields if provided in the request body
+    if (req.body.hasOwnProperty('isCompleted')) {
+      task.isCompleted = req.body.isCompleted;
+    } else if (req.body.title === undefined) {
+      // If no specific update is provided, toggle completion status (backward compatibility)
+      task.isCompleted = !task.isCompleted;
+    }
+
+    if (req.body.title !== undefined) {
+      task.title = req.body.title;
+    }
+    if (req.body.priority !== undefined) {
+      task.priority = req.body.priority;
+    }
+    if (req.body.category !== undefined) {
+      task.category = req.body.category;
+    }
+    if (req.body.dueDate !== undefined) {
+      task.dueDate = req.body.dueDate;
+    }
 
     const updatedTask = await task.save();
     res.json(updatedTask);
@@ -40,14 +71,18 @@ router.patch('/:id', async (req, res) => {
   }
 });
 
-// DELETE A TASK (Delete)
-router.delete('/:id', async (req, res) => {
+// DELETE A TASK (Now only lets the user delete their *own* tasks)
+router.delete('/:id', authMiddleware, async (req, res) => { // <-- 2. Middleware added
   try {
-    const task = await Task.findById(req.params.id);
-    if (!task) return res.status(404).json({ message: "Task not found" });
+    // 6. Find and delete the task ONLY if it matches the ID AND belongs to the user
+    const result = await Task.findOneAndDelete({ _id: req.params.id, userId: req.user.id });
+    
+    if (!result) {
+      // Return 404 if the task doesn't exist or doesn't belong to the user
+      return res.status(404).json({ message: "Task not found or you don't have permission" });
+    }
 
-    await task.deleteOne();
-    res.json({ message: "Task deleted" });
+    res.json({ message: "Task deleted successfully" });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
