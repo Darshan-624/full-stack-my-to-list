@@ -1,58 +1,94 @@
-Access to XMLHttpRequest at 'https://full-stack-my-todo-list.onrender.com/api/auth/register' from origin 'http://localhost:3001' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.
-Register.js:15  POST https://full-stack-my-todo-list.onrender.com/api/auth/register net::ERR_FAILED
-dispatchXhrRequest @ xhr.js:198
-xhr @ xhr.js:15
-dispatchRequest @ dispatchRequest.js:51
-_request @ Axios.js:185
-request @ Axios.js:40
-httpMethod @ Axios.js:224
-wrap @ bind.js:5
-handleSubmit @ Register.js:15
-executeDispatch @ react-dom-client.development.js:19116
-runWithFiberInDEV @ react-dom-client.development.js:870
-processDispatchQueue @ react-dom-client.development.js:19165
-(anonymous) @ react-dom-client.development.js:19767
-batchedUpdates$1 @ react-dom-client.development.js:3255
-dispatchEventForPluginEventSystem @ react-dom-client.development.js:19320
-dispatchEvent @ react-dom-client.development.js:23584
-dispatchDiscreteEvent @ react-dom-client.development.js:23552
-<form>
-exports.jsxDEV @ react-jsx-dev-runtime.development.js:327
-Register @ Register.js:26
-react_stack_bottom_frame @ react-dom-client.development.js:25904
-renderWithHooksAgain @ react-dom-client.development.js:7762
-renderWithHooks @ react-dom-client.development.js:7674
-updateFunctionComponent @ react-dom-client.development.js:10166
-beginWork @ react-dom-client.development.js:11778
-runWithFiberInDEV @ react-dom-client.development.js:870
-performUnitOfWork @ react-dom-client.development.js:17639
-workLoopSync @ react-dom-client.development.js:17469
-renderRootSync @ react-dom-client.development.js:17450
-performWorkOnRoot @ react-dom-client.development.js:16498
-performWorkOnRootViaSchedulerTask @ react-dom-client.development.js:18957
-performWorkUntilDeadline @ scheduler.development.js:45
-<Register>
-exports.jsxDEV @ react-jsx-dev-runtime.development.js:327
-App @ App.js:46
-react_stack_bottom_frame @ react-dom-client.development.js:25904
-renderWithHooksAgain @ react-dom-client.development.js:7762
-renderWithHooks @ react-dom-client.development.js:7674
-updateFunctionComponent @ react-dom-client.development.js:10166
-beginWork @ react-dom-client.development.js:11778
-runWithFiberInDEV @ react-dom-client.development.js:870
-performUnitOfWork @ react-dom-client.development.js:17639
-workLoopSync @ react-dom-client.development.js:17469
-renderRootSync @ react-dom-client.development.js:17450
-performWorkOnRoot @ react-dom-client.development.js:16498
-performWorkOnRootViaSchedulerTask @ react-dom-client.development.js:18957
-performWorkUntilDeadline @ scheduler.development.js:45
-<App>
-exports.jsxDEV @ react-jsx-dev-runtime.development.js:327
-./src/index.js @ index.js:12
-options.factory @ react refresh:37
-__webpack_require__ @ bootstrap:22
-(anonymous) @ startup:7
-(anonymous) @ startup:7
-Register.js:19 Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'data')
-    at handleSubmit (Register.js:19:1)
-    i am getting this whener i try to regiester ?and how can i regiester through my mail na so add like to enter the email of theres to regiester 
+Deploy failed for full-stack-my-todo-list
+A failure prevented us from deploying your project.
+Why did it fail?
+Fix Netlify client directory issue - Multiple deployment solutions added
+Today at 8:15 PM, by Darshan-624Darshan-624 on GitHub
+
+Production: main@a42e710
+
+Retry
+Deploy settings
+Delete deploy
+Deploy log
+Why did it fail?
+
+
+
+
+Maximize log
+Initializing
+Complete
+Building
+Failed
+8:15:55 PM: Netlify Build                                                 
+8:15:55 PM: ────────────────────────────────────────────────────────────────
+8:15:55 PM: ​
+8:15:55 PM: ❯ Version
+8:15:55 PM:   @netlify/build 35.1.10
+8:15:55 PM: ​
+8:15:55 PM: ❯ Flags
+8:15:55 PM:   accountId: 689cc52499b1ef094224821c
+8:15:55 PM:   baseRelDir: true
+8:15:55 PM:   buildId: 68f64b0f3d3e5c00088f9ba6
+8:15:55 PM:   deployId: 68f64b0f3d3e5c00088f9ba8
+8:15:55 PM: ​
+8:15:55 PM: ❯ Current directory
+8:15:55 PM:   /opt/build/repo/client
+8:15:55 PM: ​
+8:15:55 PM: ❯ Config file
+8:15:55 PM:   /opt/build/repo/netlify.toml
+8:15:55 PM: ​
+8:15:55 PM: ❯ Context
+8:15:55 PM:   production
+8:15:55 PM: ​
+8:15:55 PM: build.command from netlify.toml                               
+8:15:55 PM: ────────────────────────────────────────────────────────────────
+8:15:55 PM: ​
+8:15:55 PM: $ npm install && npm run build
+8:15:57 PM: up to date, audited 1348 packages in 2s
+8:15:57 PM: 271 packages are looking for funding
+8:15:57 PM:   run `npm fund` for details
+8:15:57 PM: 9 vulnerabilities (3 moderate, 6 high)
+8:15:57 PM: To address all issues (including breaking changes), run:
+8:15:57 PM:   npm audit fix --force
+8:15:57 PM: Run `npm audit` for details.
+8:15:57 PM: > client@0.1.0 build
+8:15:57 PM: > cross-env CI=false react-scripts build
+8:15:57 PM: sh: 1: cross-env: not found
+8:15:57 PM: ​
+8:15:57 PM: "build.command" failed                                        
+8:15:57 PM: ────────────────────────────────────────────────────────────────
+8:15:57 PM: ​
+8:15:57 PM:   Error message
+8:15:57 PM:   Command failed with exit code 127: npm install && npm run build (https://ntl.fyi/exit-code-127)
+8:15:57 PM: ​
+8:15:57 PM:   Error location
+8:15:57 PM:   In build.command from netlify.toml:
+8:15:57 PM:   npm install && npm run build
+8:15:57 PM: ​
+8:15:57 PM:   Resolved config
+8:15:57 PM:   build:
+8:15:57 PM:     base: /opt/build/repo/client
+8:15:57 PM:     command: npm install && npm run build
+8:15:57 PM:     commandOrigin: config
+8:15:57 PM:     environment:
+8:15:57 PM:       - CI
+8:15:57 PM:       - ESLINT_NO_DEV_ERRORS
+8:15:57 PM:       - NODE_ENV
+8:15:57 PM:     publish: /opt/build/repo/client/build
+8:15:57 PM:     publishOrigin: config
+8:15:57 PM:   redirects:
+8:15:57 PM:     - from: /*
+      status: 200
+      to: /index.html
+  redirectsOrigin: config
+8:15:57 PM: Build failed due to a user error: Build script returned non-zero exit code: 2
+8:15:57 PM: Failing build: Failed to build site
+8:15:58 PM: Finished processing build request in 18.006s
+8:15:58 PM: Failed during stage 'building site': Build script returned non-zero exit code: 2 (https://ntl.fyi/exit-code-2)
+Deploying
+Skipped
+Cleanup
+Skipped
+Post-processing
+Skipped

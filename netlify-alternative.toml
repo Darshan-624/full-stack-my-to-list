@@ -1,0 +1,21 @@
+# Alternative Netlify Configuration
+[build]
+  command = "cd client && npm ci --legacy-peer-deps && npm run build"
+  publish = "client/build"
+
+[build.environment]
+  NODE_VERSION = "20"
+  CI = "false"
+  ESLINT_NO_DEV_ERRORS = "true"
+  NODE_ENV = "production"
+  NPM_CONFIG_PRODUCTION = "false"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Alternative build commands if the above fails:
+# Option 1: command = "npm run build"
+# Option 2: command = "cd client && npm install --legacy-peer-deps && npm run build"
+# Option 3: command = "cd client && yarn install && yarn build"
